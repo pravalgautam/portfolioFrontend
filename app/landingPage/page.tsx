@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa'; 
 import Link from "next/link";
 
-// Define the ProfileData interface
+
 interface ProfileData {
   title: string;
   description: string;
@@ -18,7 +18,7 @@ const LandingPage = () => {
     useEffect(() => {
       const fetchData = async () => {
           try {
-              const response = await fetch('http://localhost:5000/api/portfolio');
+              const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/portfolio`);
               if (!response.ok) {
                   throw new Error('Network response was not ok');
               }
@@ -26,9 +26,9 @@ const LandingPage = () => {
               setProfileData(data);
           } catch (error: unknown) {
               if (error instanceof Error) {
-                  setError(error); // Now, error is known to be of type Error
+                  setError(error); 
               } else {
-                  setError(new Error('An unknown error occurred')); // Fallback for non-Error types
+                  setError(new Error('An unknown error occurred')); 
               }
           } finally {
               setLoading(false);
